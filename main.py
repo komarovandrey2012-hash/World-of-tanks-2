@@ -82,7 +82,7 @@ def load_textures():
 
 w = Tk()
 load_textures()
-w.title('Танки на минималках 2.0')
+w.title('World of tanks 2')
 canv = Canvas(w, width=world.SCREEN_WIDTH, height=world.SCREEN_HEIGHT, bg = '#8ccb5e')
 canv.pack()
 world.initialize(canv)
