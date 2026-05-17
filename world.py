@@ -93,18 +93,22 @@ def initialize(canv):
     # load_map('../map/3.tmap')
     # load_map('../map/brick.tmap')
 
-def create_map(rows = 25, cols = 25):
+def create_map(rows=25, cols=25):
     global _map
     _map = []
-    for  i in range(rows):
+    for i in range(rows):
         row = []
         for j in range(cols):
-            block = GROUND
-            if i ==0 or j ==0 or i == rows-1 or j == cols-1:
+            # Границы - бетон
+            if i == 0 or j == 0 or i == rows-1 or j == cols-1:
                 block = CONCRETE
-            elif randint(1,100) <= 23:
+            # Создаем больше проходимого пространства для спавна
+            elif i == 1 or j == 1 or i == rows-2 or j == cols-2:
+                block = GROUND  # Внутренние границы - земля
+            elif randint(1, 100) <= 15:  # Уменьшил шанс препятствий
                 block = choice([BRICK, WATER, CONCRETE, MISSLE, Speed_up])
-
+            else:
+                block = GROUND
             cell = _Cell(_canvas, block, BLOCK_SIZE * j, BLOCK_SIZE * i)
             row.append(cell)
         _map.append(row)

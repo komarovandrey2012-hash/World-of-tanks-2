@@ -53,32 +53,32 @@ def key_press(event):
 
 
 def load_textures():
-    texture.load ('tank_down', '../img/tank_down.png')
-    texture.load('tank_up', '../img/tank_up.png')
-    texture.load('tank_down', '../img/tank_down.png')
-    texture.load('tank_left', '../img/tank_left.png')
-    texture.load('tank_right', '../img/tank_right.png')
+    texture.load ('tank_down', './img/tank_down.png')
+    texture.load('tank_up', './img/tank_up.png')
+    texture.load('tank_down', './img/tank_down.png')
+    texture.load('tank_left', './img/tank_left.png')
+    texture.load('tank_right', './img/tank_right.png')
 
-    texture.load(world.BRICK, '../img/brick.png')
-    texture.load(world.WATER, '../img/water.png')
-    texture.load(world.CONCRETE, '../img/wall.png')
-    texture.load(world.MISSLE, '../img/bonus.png')
-    texture.load(world.Speed_up, '../img/speed_up.png')
+    texture.load(world.BRICK, './img/brick.png')
+    texture.load(world.WATER, './img/water.png')
+    texture.load(world.CONCRETE, './img/wall.png')
+    texture.load(world.MISSLE, './img/bonus.png')
+    texture.load(world.Speed_up, './img/speed_up.png')
 
-    texture.load('tank_up_player', '../img/tank_up_player.png')
-    texture.load('tank_down_player', '../img/tank_down_player.png')
-    texture.load('tank_left_player', '../img/tank_left_player.png')
-    texture.load('tank_right_player', '../img/tank_right_player.png')
+    texture.load('tank_up_player', './img/tank_up_player.png')
+    texture.load('tank_down_player', './img/tank_down_player.png')
+    texture.load('tank_left_player', './img/tank_left_player.png')
+    texture.load('tank_right_player', './img/tank_right_player.png')
 
-    texture.load('missile_up', '../img/missile_up.png')
-    texture.load('missile_down', '../img/missile_down.png')
-    texture.load('missile_left', '../img/missile_left.png')
-    texture.load('missile_right', '../img/missile_right.png')
+    texture.load('missile_up', './img/missile_up.png')
+    texture.load('missile_down', './img/missile_down.png')
+    texture.load('missile_left', './img/missile_left.png')
+    texture.load('missile_right', './img/missile_right.png')
 
-    texture.load('100_hp', '../img/100.png')
-    texture.load('75_hp', '../img/75.png')
-    texture.load('50_hp', '../img/50.png')
-    texture.load('25_hp', '../img/25.png')
+    texture.load('100_hp', './img/100.png')
+    texture.load('75_hp', './img/75.png')
+    texture.load('50_hp', './img/50.png')
+    texture.load('25_hp', './img/25.png')
 
 w = Tk()
 load_textures()
@@ -88,6 +88,21 @@ canv.pack()
 world.initialize(canv)
 tanks_collection.initialize(canv)
 missiles_collection.initialize(canv)
+
+def restart_game():
+    """Перезапуск игры"""
+    tanks_collection.reset_game()
+    world.create_map(25, 25)  # Пересоздаем карту
+    tanks_collection.initialize(canv)  # Переинициализируем танки
+    # Сбрасываем камеру
+    player = tanks_collection.get_player()
+    if player:
+        world.set_camera_xy(player.get_x() - world.SCREEN_WIDTH//2 + player.get_size()//2,
+                            player.get_y() - world.SCREEN_HEIGHT//2 + player.get_size()//2)
+
+# Добавьте кнопку перезапуска (опционально)
+# restart_btn = Button(w, text="Restart", command=restart_game)
+# restart_btn.pack()
 
 # def debug_hp():
 #     """Функция для отладки HP индикаторов"""
