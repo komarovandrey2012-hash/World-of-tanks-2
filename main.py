@@ -89,6 +89,21 @@ world.initialize(canv)
 tanks_collection.initialize(canv)
 missiles_collection.initialize(canv)
 
+def restart_game():
+    """Перезапуск игры"""
+    tanks_collection.reset_game()
+    world.create_map(25, 25)  # Пересоздаем карту
+    tanks_collection.initialize(canv)  # Переинициализируем танки
+    # Сбрасываем камеру
+    player = tanks_collection.get_player()
+    if player:
+        world.set_camera_xy(player.get_x() - world.SCREEN_WIDTH//2 + player.get_size()//2,
+                            player.get_y() - world.SCREEN_HEIGHT//2 + player.get_size()//2)
+
+# Добавьте кнопку перезапуска (опционально)
+# restart_btn = Button(w, text="Restart", command=restart_game)
+# restart_btn.pack()
+
 # def debug_hp():
 #     """Функция для отладки HP индикаторов"""
 #     player = tanks_collection.get_player()

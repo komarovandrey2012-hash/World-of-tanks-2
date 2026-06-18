@@ -171,8 +171,9 @@ class Unit:
 
 
 class Tank(Unit):
-    def __init__(self, canvas,row, col, bot = True):
-        super().__init__(canvas, col * world.BLOCK_SIZE, row * world.BLOCK_SIZE, 2, 8, bot, 'tank_up')
+    def __init__(self, canvas, x, y, bot=True):
+        # x и y уже в пикселях
+        super().__init__(canvas, x, y, 2, 8, bot, 'tank_up')
         if bot:
             self._forward_image = 'tank_up'
             self._backward_image = 'tank_down'
@@ -188,7 +189,7 @@ class Tank(Unit):
         self._ammo = 80
         self._turn = 0
         self._usual_speed = self._speed
-        self._unusual_speed = self._speed //2
+        self._unusual_speed = self._speed // 2
         self._target = None
         self._hp_indicator = HPIndicator(canvas, self)
 
